@@ -35,7 +35,6 @@
 
     // TODO: update user info,when success, run updateItem
     // 提示：Math.random().toString(36).substring(2) 生成随机的字符串
-    Math.random().toString(36).substring(2);
     function updateItemData(id) {
       var data = {};
       data.id = id;

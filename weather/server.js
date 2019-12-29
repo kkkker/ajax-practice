@@ -5,6 +5,12 @@ var proxyServer = http.createServer((request, response) => {
   const parsedUrl = url.parse(request.url);
 
   // please code here ···
+  response.writeHead(200, {
+    'Access-Control-Allow-Origin': '*',
+    'Access-Control-Allow-Methods': '*',
+    'Access-Control-Allow-Headers': 'Content-Type',
+    'Content-Type': 'text/plain;charset=utf-8'
+  });
 
   if (parsedUrl.pathname === '/') {
     http.get('http://apis.juhe.cn/simpleWeather/query?' + parsedUrl.query, res => {

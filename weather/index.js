@@ -51,7 +51,7 @@
       url: 'http://localhost:7777',
       data: {
         city: city,
-        key: '629993751d6e310be1146bd91dce59b3'
+        key: '9f772a897685aaf813155e91c8c88d9b'
       },
       success: resultSuccess,
       error: function (error) {
@@ -62,6 +62,25 @@
   
   // please code here ···
   function ajax (options) {
+    var request = new XMLHttpRequest();
 
+    request.onreadystatechange = function () {
+      if(request.readyState == 4){
+      if((request.status >= 200 && request.status < 300)||request.status == 304){
+        options.success(JSON.parse(request.responseText));
+      } else {
+        options.error();
+      }
+      }  
+    }
+    if (options.type === 'post') {
+      request.open("POST", options.url, true);
+      request.setRequestHeader('Content-Type', options.headers);
+      request.send(options.data);
+    } else if (options.type === 'get') {
+      request.open("GET", options.url + '/?city=' + options.data.city + '&key=' + options.data.key, true);
+      request.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+      request.send();
+    }
   }
 })();
